@@ -1,0 +1,91 @@
+"use client"
+import { useContext, useEffect, useState } from "react"
+import ButtonPrimary from "./ButtonPrimary"
+import { AppContext } from "@app/context/MainContext"
+import { addPost } from "@app/api/api"
+import { useSession } from "next-auth/react"
+import InputBox from "./InputBox"
+import { GiveData } from "./GiveData"
+
+const PostBox = () => {
+   const {dispatch}=useContext(AppContext)
+   const [us, setUs] = useState<string>("")
+   const [caption, setCaption] = useState<string>("")
+   const [uri, setUri] = useState<any>()
+   const data:any = GiveData();
+   useEffect(()=>{
+    if(data)
+    {
+      console.log(data)
+      setUs(data?.username)
+    }
+   },[])
+   function fileToUrl() {
+    const elem:any  = document?.querySelector("input[type=file]");
+    const file = elem?.files[0]
+    const reader = new FileReader();
+    reader.addEventListener(
+      "load",
+      () => {
+        // convert image file to base64 string
+        console.log(reader.result)
+        setUri(reader?.result);
+      },
+      false,
+    );
+  
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+ 
+    const handleClick=async()=>{
+      const elem = document.getElementById('fl')
+      elem?.focus()
+    }
+    const handlePost = async()=>{
+      const formdata:any = {
+        username: us,
+        imageUri:uri,
+        likeCount:0,
+        caption:caption
+      }
+      const res = await addPost(formdata)
+      console.log(res)
+      
+        dispatch({
+          type:'notPosting'
+        })
+      
+    }
+    const handleRandClick=()=>{
+      dispatch({
+        type:'notPosting'
+      })
+    }
+  return (
+    <>
+    <div className="postBox-container"
+    onClick={handleRandClick}
+    >
+    </div>
+
+         <div className="post-flex">
+            <div className="postBox-main">
+      <h3 className="create-post-heading">Create new post</h3>
+      <hr/>
+      <p className="dragPhoto-text">Drag photos and videos here</p>
+      <ButtonPrimary buttonValue="Select from computer" onclickFun={handleClick}/>
+      <InputBox placeText="Write A Captions" type="text" val={caption} setVal={setCaption}/>
+      <ButtonPrimary buttonValue="Post" onclickFun={handlePost}/>
+
+      <input type="file" name="fl" id="fl" className="fl" onChange={fileToUrl} />
+    </div>
+    </div>
+   
+   
+    </>
+  )
+}
+
+export default PostBox
