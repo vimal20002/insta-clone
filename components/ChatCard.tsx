@@ -23,7 +23,7 @@ const ChatCard = ({imgUri, lastMessage, name, setTargetmail, sid, setName}:CardP
       <img className="chatImg" src="https://www.hindi.awazthevoice.in/blog/wp-content/uploads/2022/08/1760548ccd1e71a6ca0639903c5cd1be.jpg" alt="img" />
       <div className="cardText">
             <h5 className="cardName">{name}</h5>
-            <p>{lastMessage}</p>
+            <p className="chat-p">{lastMessage}</p>
       </div>
     </div>
   )

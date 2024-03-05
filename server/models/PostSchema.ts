@@ -5,6 +5,7 @@ export const postSchema = new mongoose.Schema({
     imageUri:String,
     likeCount:Number,
     comments:[Object],
-    caption:String
+    caption:String,
+    likedBy:[String]
 })
 export const postModel = mongoose.model('post', postSchema)

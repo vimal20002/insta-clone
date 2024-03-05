@@ -1,5 +1,5 @@
 "use client"
-import { getUserData } from "@app/api/api"
+import { getFriends, getUserData } from "@app/api/api"
 import { AppContext } from "@app/context/MainContext"
 import { GiveData } from "@components/GiveData"
 import Nav from "@components/Nav"
@@ -16,6 +16,8 @@ const page = () => {
   const [flag, setFlag] = useState<boolean>(false);
   const user = GiveData()
   const [obj, setObj] = useState<any>()
+  const [followed,setFollowed]=useState<Boolean>(false);
+
   useEffect(()=>{
      (async()=>{
     if(user){
@@ -24,9 +26,15 @@ const page = () => {
     const res = await getUserData({username})
     setObj(res)
     setFlag(res?.username == user?.username)
+    const obj = await getFriends({username:user?.username})
+    const arr = obj?.filter((e:any)=>{
+      return e?.fUsername == res?.username
+    })
+    if(arr.length)setFollowed(true)
     }
     })();
   },[])
+ 
   
   useEffect(() => {
     dispatch({ type: 'setLogin' })
@@ -34,7 +42,7 @@ const page = () => {
   return (
      <>
      
-     <ProfileComponent name={obj?.name} username={obj?.username} followers={1000} following={173324} flag={flag} postsArray = {obj?.posts}/>
+     <ProfileComponent followed={followed} setFollowed={setFollowed} name={obj?.name} username={obj?.username} followers={1000} following={173324} flag={flag} postsArray = {obj?.posts} myname = {user?.username}/>
      </>
   )
 }

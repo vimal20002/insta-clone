@@ -8,11 +8,12 @@ import InputBox from "./InputBox"
 import { GiveData } from "./GiveData"
 
 const PostBox = () => {
-   const {dispatch}=useContext(AppContext)
+   const {state, dispatch}=useContext(AppContext)
    const [us, setUs] = useState<string>("")
    const [caption, setCaption] = useState<string>("")
    const [uri, setUri] = useState<any>()
    const data:any = GiveData();
+   const {isPosting} = state;
    useEffect(()=>{
     if(data)
     {
@@ -65,7 +66,7 @@ const PostBox = () => {
     }
   return (
     <>
-    <div className="postBox-container"
+   {isPosting && <><div className="postBox-container"
     onClick={handleRandClick}
     >
     </div>
@@ -82,6 +83,8 @@ const PostBox = () => {
       <input type="file" name="fl" id="fl" className="fl" onChange={fileToUrl} />
     </div>
     </div>
+    </>
+    }
    
    
     </>

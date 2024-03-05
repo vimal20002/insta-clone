@@ -86,7 +86,7 @@ const Allstory = () => {
     <div className="allStory" id="allstory" style={{left:`${leftvalue}px`}}>
       {
        data.map((e)=>{
-        return <StoryCard uri={e.uri} name={e.name} key={e?.uri}/>
+        return <StoryCard uri={e.uri} name={e.name} />
        })
       }
     </div>

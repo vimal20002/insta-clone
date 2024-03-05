@@ -3,9 +3,12 @@ import Nav from "../components/Nav"
 import "@styles/styles.css"
 import AuthProvider from "@components/AuthProvider"
 import MainProvider from "./providers/MainProvider"
+import SearchUser from "@components/SearchUser"
+import Notification from "@components/Notification"
+import PostBox from "@components/PostBox"
 export const metadata = {
-  title: 'Nobody',
-  description: 'Goat Developer of 90s',
+  title: 'Socialize',
+  description: 'A Clone of Instagram build with Engineering',
 }
 type props = {
   children: ReactElement
@@ -18,6 +21,9 @@ export default function RootLayout({ children }: props) {
         <AuthProvider>
           <MainProvider>
           <Nav/>
+          <SearchUser/>
+          <Notification/>
+          <PostBox/>
           {children}
           </MainProvider>
         </AuthProvider>

@@ -13,9 +13,11 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [ok, setOk] = useState<boolean>()
     const [password, setPassword] = useState("");
+    const {isLogin} = state;
     useEffect(() => {
-    }, [state?.isLogin])
+    }, [isLogin])
     const handleSubmit = async () => {
+        console.log(email,password);
         const formData = {
             email, password,
             redirect: false
@@ -24,6 +26,10 @@ const Login = () => {
         setPassword("")
         const data = await handleLogin(formData)    
         localStorage.setItem('user', JSON.stringify(data));  
+        if(data?.username)
+        {
+            dispatch({type:"setLogin"})
+        }
     }
     const intervalId = setInterval(() => {
         if (index === 2) {

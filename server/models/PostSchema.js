@@ -10,6 +10,7 @@ exports.postSchema = new mongoose_1.default.Schema({
     imageUri: String,
     likeCount: Number,
     comments: [Object],
-    caption: String
+    caption: String,
+    likedBy: [String]
 });
 exports.postModel = mongoose_1.default.model('post', exports.postSchema);

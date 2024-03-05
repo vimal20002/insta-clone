@@ -15,6 +15,8 @@ const userSchema = new mongoose_1.default.Schema({
     password: String,
     socketIdd: String,
     friends: [FriendModel_1.friendSchema],
-    posts: [PostSchema_1.postSchema]
+    following: [FriendModel_1.friendSchema],
+    posts: [PostSchema_1.postSchema],
+    notification: [Object]
 });
 exports.userModal = mongoose_1.default.model("user", userSchema);

@@ -9,6 +9,8 @@ const userSchema = new mongoose.Schema({
     password:String,
     socketIdd:String,
     friends:[friendSchema],
-    posts:[postSchema]
+    following:[friendSchema],
+    posts:[postSchema],
+    notification:[Object]
 })
 export const userModal = mongoose.model("user",userSchema)

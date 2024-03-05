@@ -1,5 +1,5 @@
-import { useState } from "react"
-import PhotoCard from "./PhotoCard"
+import { follow, unfollow } from "@app/api/api"
+import Gallery from "./Gallery"
 
 type props={
     flag:Boolean,
@@ -7,14 +7,24 @@ type props={
     username:String,
     name:String,
     followers:number,
-    following:number
+    following:number,
+    followed:Boolean,
+    setFollowed:(followed:Boolean)=>void,
+    myname:String
 
 }
 
-const ProfileComponent = ({flag, postsArray, followers, following, name,username}:props) => {
+const ProfileComponent = ({followed, setFollowed, flag, postsArray, followers, following, name,username, myname}:props) => {
     
-      const [followed,setFollowed]=useState(false);
-      const handleClick=()=>{
+      const handleClick=async()=>{
+        if(followed)
+        {
+          await unfollow({username, myname})
+        }
+        else
+        {
+          await follow({username, myname})
+        }
        setFollowed(!followed);
       }
 
@@ -56,13 +66,7 @@ const ProfileComponent = ({flag, postsArray, followers, following, name,username
       <span className="user-title">{name}</span>
      </div>
      <div className="line"></div>
-     <div className="posts-section">
-     {
-      postsArray?.map((e)=>{
-        return <PhotoCard  imageSource={e?.imageUri} />
-      })
-     }
-     </div>
+     <Gallery data={postsArray}/>
      </>
   )
 }

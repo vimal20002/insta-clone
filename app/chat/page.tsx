@@ -1,5 +1,5 @@
 "use client"
-import { getAllUsers } from '@app/api/api';
+import { getAllUsers, getFriends } from '@app/api/api';
 import { AppContext } from '@app/context/MainContext';
 import ButtonPrimary from '@components/ButtonPrimary';
 import ChatCard from '@components/ChatCard';
@@ -29,20 +29,26 @@ const page = () => {
     const [email, setEmail] = useState<string | undefined |null>("")
 
     const [socket, setSocket] = useState<Socket | null>(null)
-    const [incomingMessages, setIncomingMessages] = useState<IncomingMessage[] >([]);
+    const [friendArr, setFriendArr] = useState<any[] >([]);
     const [messages, setMessages] = useState<IncomingMessage[]>([]);
     const [targetmail, setTargetmail] = useState<string>('');
     const { state, dispatch } = useContext(AppContext);
-    const user = GiveData()
+    const {user} = state;
+    
     useEffect(()=>{
+        const fun = async()=>{
       if(user){
       console.log(user)
       dispatch({ type: 'setLogin' })
             setEmail(user?.email)
             setMyName(user?.name)
             socket?.emit('addMe',user?.email)
+            const res = await getFriends({username:user?.username})
+            setFriendArr(res)
       }
-    },[])
+    }
+    fun()
+    },[user])
     let sk:Socket | null;
     const connectSocket=() => {
         sk?.disconnect();
@@ -62,6 +68,12 @@ const page = () => {
         }
       };
     useEffect(()=>{
+        dispatch({type:'hideNavTitle'})
+        const res = GiveData()
+        if(res){
+          dispatch({type:"setUser", payload:res})
+          dispatch({type:'setLogin'})
+        }
         const getUserFun = async()=>{
             const friends =  await getAllUsers();
              dispatch({type:'setUsers',payload:friends})
@@ -70,9 +82,6 @@ const page = () => {
         connectSocket()
         return ()=>{disconnectSocket()};
     },[])
-    useEffect(()=>{
-        console.log(state?.user)
-    },[state])
     useEffect(() => {
         if (socket && email) {
             socket.on('incomingPrivateMessage', ({ senderId, message }: IncomingMessage) => {
@@ -117,9 +126,9 @@ const page = () => {
                             <h4 >Messages</h4>
                             <div className="chat-cards">
                                 {
-                                    user?.friends?.map((e:any)=>{
+                                    friendArr?.map((e:any)=>{
                                          if(e?.email !== email)
-                                        return <ChatCard imgUri='' lastMessage={e?.messages[e?.messages?.length - 1].message} name={e?.fUsername} sid = {e?.fEmail} setTargetmail={setTargetmail} setName = {setName} />
+                                    return <ChatCard imgUri='' lastMessage={e?.messages[e?.messages?.length - 1]?.message||"Say hello to new friend"} name={e?.fUsername} sid = {e?.fEmail} setTargetmail={setTargetmail} setName = {setName} />
                                     })
                                 }
                             </div>

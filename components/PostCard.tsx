@@ -1,19 +1,46 @@
+"use client"
+import { useContext, useEffect, useState } from "react"
 import LikeCounts from "./LikeCounts"
 import MainimagePost from "./MainimagePost"
 import PostCaption from "./PostCaption"
 import PostCommentCount from "./PostCommentCount"
 import PostOptions from "./PostOptions"
 import UserdetailPost from "./UserdetailPost"
+import { AppContext } from "@app/context/MainContext"
+import ShareUser from "./ShareUser"
+type props = {
+  username:string,
+  imageUri:string,
+  likeCount:number,
+  comment:Object[],
+  caption:string,
+  id:string,
+  likedBy:[String],
 
-const PostCard = () => {  
+}
+const PostCard = ({username, imageUri, likeCount, comment, caption,id, likedBy}:props) => {  
+  const [cnt, setCnt] = useState(likeCount)
+  const [liked, setLiked] = useState<Boolean>(false)
+  const {state} = useContext(AppContext)
+  const[shareBox, setShareBox] = useState<Boolean>(false)
+  const {user} = state;
+
+  useEffect(()=>{
+    // console.log(likedBy?.includes(user?.username), caption)
+    setLiked(likedBy?.includes(user?.username))
+  },[user])
+
+
   return (
     <div className="postcard">
-      <UserdetailPost name="Rvcjinsta" time="4h"/>
-      <MainimagePost uri="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd4y7zVmHqMDDZPFYCAtIvlWWGYofVYEwNg4AyzbXsRg&s"/>
-      <PostOptions/>
-      <LikeCounts count={3663367}/>
-      <PostCaption name="Rvcjinsta" caption="Salar vs Dunki"/>
-      <PostCommentCount count={26336}/>
+      {   shareBox && <ShareUser email={user?.email} id={id} setFlag={setShareBox}   friends={user?.friends}/>
+}
+      <UserdetailPost name={username} time="4h"/>
+      <MainimagePost uri={imageUri}/>
+      <PostOptions setShareBox={setShareBox} pid={id} cnt={cnt} incLike={setCnt} setLiked = {setLiked} liked={liked} me = {state?.user?.username}/>
+      <LikeCounts count={cnt}/>
+      <PostCaption name={username} caption={caption}/>
+      <PostCommentCount count={comment?.length}/>
       <hr />
     </div>
   )

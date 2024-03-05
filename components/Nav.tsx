@@ -38,18 +38,18 @@ const Nav = () => {
         }
         
     ]
-    const {state} = useContext(AppContext)
+    const {state, dispatch} = useContext(AppContext)
   return (
     state?.isLogin ?
     <div className={`main-nav addBorder`}>
-        <h2>Socalize</h2>
+        <h2>Socailize</h2>
     
        {/* {state?.showNavTitle? <img className="clone-title" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfsGUMX5_VbQJQ4OpHr0SWdUin5PjJyLmfQ7Zzd8JyGA&s" alt="" />
        :<FaInstagram className="instaLogo"/>} */}
        <div className="items">
         {
             navItems.map((elements)=>{
-                return <NavElements id={""} ImgLink={elements.ImgLink} title={elements.title}/>
+                return <NavElements  id={""} ImgLink={elements.ImgLink} title={elements.title}/>
             })
         }
        </div>

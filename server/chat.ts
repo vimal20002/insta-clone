@@ -5,7 +5,7 @@ const conn: { [key:string]:boolean} = {}
 export const ChatHandler = async(io:Server)=>{
     console.log('dghs')
     io.on("connection", (socket:Socket) => {
-        console.log(socket?.id); 
+        console.log("User Connected to socket socket id : ",socket?.id); 
         conn[socket?.id] = true;
         socket.on('privateMessage',async({ targetmail, email, message }:any)=>{
             console.log( email, targetmail, "line 9")
@@ -17,14 +17,14 @@ export const ChatHandler = async(io:Server)=>{
               arr.push({message, senderId:email}) 
               friend.messages = arr;  
               await user?.save()
-              const user1 = await userModal.findOne({email:targetmail});
-            let friend1 :any = user1?.friends.filter((e)=>{
+              const frnd = await userModal.findOne({email:targetmail});
+            let friend1 :any = frnd?.friends.filter((e)=>{
               return e.fEmail == email
             })[0];
             const arr1:Array<Object> = friend1?.messages;
             arr1.push({message, senderId:email}) 
             friend1.messages = arr1;  
-            await user1?.save()
+            await frnd?.save()
 
             io.to(users[targetmail]).emit('incomingPrivateMessage', { senderId: email, message })
           })

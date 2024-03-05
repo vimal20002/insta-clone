@@ -16,7 +16,7 @@ const conn = {};
 const ChatHandler = (io) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('dghs');
     io.on("connection", (socket) => {
-        console.log(socket === null || socket === void 0 ? void 0 : socket.id);
+        console.log("User Connected to socket socket id : ", socket === null || socket === void 0 ? void 0 : socket.id);
         conn[socket === null || socket === void 0 ? void 0 : socket.id] = true;
         socket.on('privateMessage', ({ targetmail, email, message }) => __awaiter(void 0, void 0, void 0, function* () {
             console.log(email, targetmail, "line 9");
@@ -28,14 +28,14 @@ const ChatHandler = (io) => __awaiter(void 0, void 0, void 0, function* () {
             arr.push({ message, senderId: email });
             friend.messages = arr;
             yield (user === null || user === void 0 ? void 0 : user.save());
-            const user1 = yield UserModel_1.userModal.findOne({ email: targetmail });
-            let friend1 = user1 === null || user1 === void 0 ? void 0 : user1.friends.filter((e) => {
+            const frnd = yield UserModel_1.userModal.findOne({ email: targetmail });
+            let friend1 = frnd === null || frnd === void 0 ? void 0 : frnd.friends.filter((e) => {
                 return e.fEmail == email;
             })[0];
             const arr1 = friend1 === null || friend1 === void 0 ? void 0 : friend1.messages;
             arr1.push({ message, senderId: email });
             friend1.messages = arr1;
-            yield (user1 === null || user1 === void 0 ? void 0 : user1.save());
+            yield (frnd === null || frnd === void 0 ? void 0 : frnd.save());
             io.to(users[targetmail]).emit('incomingPrivateMessage', { senderId: email, message });
         }));
         socket.on('addMe', (email) => __awaiter(void 0, void 0, void 0, function* () {
