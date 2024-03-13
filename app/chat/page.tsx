@@ -38,7 +38,7 @@ const page = () => {
     useEffect(()=>{
         const fun = async()=>{
       if(user){
-      console.log(user)
+    //   console.log(user)
       dispatch({ type: 'setLogin' })
             setEmail(user?.email)
             setMyName(user?.name)

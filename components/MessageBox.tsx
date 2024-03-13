@@ -33,7 +33,7 @@ const MessageBox = ({handleSend, messages, name, email}:props) => {
          <div className="mess">
             {
               messages?.map((e)=>{
-                console.log(e, email)
+                // console.log(e, email)
                 if(e.senderId !== email)
                 {
                     return <div className="friendMessage" >{e.message}</div>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState } from "react";
 import { IoCheckmarkCircle } from "react-icons/io5";
 
@@ -13,6 +14,7 @@ const UserShareDis = ({name,  setTargetMail, targetmail}:props) => {
         setTargetMail(targetmail)
     }
   return (
+    <Link href={`/${targetmail}`}>
     <div className="userSh" onClick={handleSelect}>
       <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQadq1dY-23P-ceYTIJ9A4-hulkOzlpSeirGI5bOCk1J4Rjn9C_NMHr-NQnppAJG0-GfP3xgrmJHpykwEM" alt="" className="imgCircle" />
       <p className="sernamedisplay">{name}</p>
@@ -22,6 +24,7 @@ const UserShareDis = ({name,  setTargetMail, targetmail}:props) => {
       }
       </div>
     </div>
+    </Link>
   )
 }
 

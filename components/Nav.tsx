@@ -48,7 +48,7 @@ const Nav = () => {
        <div className="items">
         {
             navItems.map((elements)=>{
-                return <NavElements  id={""} ImgLink={elements.ImgLink} title={elements.title}/>
+                return <NavElements key={elements.title}  id={""} ImgLink={elements.ImgLink} title={elements.title}/>
             })
         }
        </div>

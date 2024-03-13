@@ -7,7 +7,7 @@ const Gallery = ({data}:props) => {
   return (
     <div className='explore-main'  >
     {data?.map((e:any)=>{
-    return <ExploreCard imageUrl={e?.imageUri} likes={e?.likeCount} comments={e?.comments.length}   />
+    return <ExploreCard key={e?._id} imageUrl={e?.imageUri} likes={e?.likeCount} comments={e?.comments.length}   />
     })
   }
     

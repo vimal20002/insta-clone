@@ -19,9 +19,7 @@ const page = () => {
   const [followed, setFollowed] = useState<Boolean>(false);
   const router=useRouter();
 
- if(username!==user?.username){
-  router.push("/error")
- }
+ 
 
   useEffect(() => {
     (async () => {
@@ -29,6 +27,9 @@ const page = () => {
         console.log(user)
         dispatch({ type: 'setLogin', payload: user })
         const res = await getUserData({ username })
+        if(res === null){
+          router.push("/error")
+         }
         console.log(res)
         setObj(res)
         setFlag(res?.username == user?.username)
@@ -49,7 +50,7 @@ const page = () => {
 return (
   <>
 
-    <ProfileComponent followed={followed} setFollowed={setFollowed} name={obj?.name} username={obj?.username} followers={1000} following={173324} flag={flag} postsArray={obj?.posts} myname={user?.username} />
+    <ProfileComponent followed={followed} setFollowed={setFollowed} name={obj?.name} username={obj?.username} followers={obj?.following?.length} following={obj?.friends?.length} flag={flag} postsArray={obj?.posts} myname={user?.username} />
   </>
 )
 }

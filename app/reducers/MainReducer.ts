@@ -7,7 +7,6 @@ type User = any;
     showNavTitle:boolean,
     showMessageBox:boolean,
     user:any,
-    socket:Socket,
     users:Array<User>,
     searchFlag:Boolean,
     notiFlag:Boolean

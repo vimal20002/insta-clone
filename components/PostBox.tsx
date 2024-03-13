@@ -17,7 +17,7 @@ const PostBox = () => {
    useEffect(()=>{
     if(data)
     {
-      console.log(data)
+      // console.log(data)
       setUs(data?.username)
     }
    },[])

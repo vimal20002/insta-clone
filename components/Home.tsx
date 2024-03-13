@@ -12,7 +12,7 @@ import Spinner from "./Spinner";
 
 const Home = () => {
   const { state, dispatch } = useContext(AppContext);
-  const { user, socket, isLogin } = state;
+  const { user, isLogin } = state;
   const [feed, setFeed] = useState<any>([]);
   const [totalPosts,setTotalPosts]=useState()
   useEffect(() => {
@@ -30,11 +30,8 @@ const Home = () => {
     }
     fun()
   }, [])
-  useEffect(() => {
-    console.log(user)
-    if (socket && user?.email) {
-      socket.emit("addMe", user?.email)
-    }}, [user])
+    // console.log(user)
+    
     const fetchMore=async ()=>{
       const availableData=await getFeed();
       console.log(availableData.length);
@@ -51,7 +48,7 @@ const Home = () => {
           <div className="postCards">
             {
               feed?.map((e: any) => {
-                return <PostCard likedBy={e?.likedBy} id={e?._id} caption={e?.caption} comment={e?.comment} imageUri={e?.imageUri} likeCount={e?.likeCount} username={e?.username} key={e?._id} />
+                return <PostCard  likedBy={e?.likedBy} id={e?._id} caption={e?.caption} comment={e?.comment} imageUri={e?.imageUri} likeCount={e?.likeCount} username={e?.username} key={e?._id} />
               })
             }
           </div>

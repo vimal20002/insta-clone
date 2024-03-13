@@ -40,11 +40,11 @@ const SearchUser = () => {
             {
                 isSearching?
                 result?.map((e)=>{
-                    return <UserShareDis setTargetMail={()=>{}} targetmail={e?.email}  name={e?.username}/>
+                    return <UserShareDis key={e?.email} setTargetMail={()=>{}} targetmail={e?.username}  name={e?.username}/>
                 })
                 :
                 recetList?.map((e)=>{
-                    return <UserShareDis setTargetMail={()=>{}} targetmail={e?.email}  name={e?.username}/>
+                    return <UserShareDis key={e?.email} setTargetMail={()=>{}} targetmail={e?.username}  name={e?.username}/>
                 })
             }
         </div>

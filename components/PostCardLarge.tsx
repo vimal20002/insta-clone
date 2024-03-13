@@ -67,7 +67,7 @@ const PostCardLarge = ({pid, setFlag, comments, imageUri, likeCount, username, l
         <hr className="hr1" />
         <CommentBox arr= {comArr}/>
         <hr className="hr1" />
-        <PostOptions pid={pid} cnt={cnt} incLike={setCnt} setLiked = {setLiked} liked={liked} me = {state?.user?.username}/>
+        <PostOptions setShareBox={()=>{}} pid={pid} cnt={cnt} incLike={setCnt} setLiked = {setLiked} liked={liked} me = {state?.user?.username}/>
         <LikeCounts count={cnt}/>
         <hr className="hr1" />
         <div className="inpl">
