@@ -3,7 +3,7 @@
 import React, { useContext } from 'react'
 import NavElements from './NavElements'
 import { AppContext } from '@app/context/MainContext'
-import { FaInstagram } from "react-icons/fa6";
+import apptitle from '../public/appp-title-2.jpg'
 
 const Nav = () => {
     const navItems=[
@@ -35,14 +35,13 @@ const Nav = () => {
         {
             ImgLink:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAeFBMVEX///8AAAD8/PzIyMienp6Dg4PZ2dmxsbHi4uLT09Pg4OBDQ0Pc3Nzh4eGpqamjo6PCwsJ5eXmWlpbu7u48PDz09PRaWlooKCgiIiLo6OgUFBRdXV1SUlLPz8+Pj490dHRoaGhKSkojIyMxMTEREREbGxtlZWW5ubmZXdhxAAADRElEQVR4nO3dC1biQBCF4QCRIAgoyFNQUIH973AGlQFJdQKmzim75v9WcOsk6e4k/UgSAAAAAAAAAECBZpZGpr9r1i8ubzeuxamTXVRkzzpnJf3S+mYT64wVTVvFBd5bB1SQFRWYWadTUXCnNqyzKbkPFTiyTqZmFqgw1k4ir+P7Ht2T79OOdSxFG6nAtnUqVUuhwmfrUKoenN+ktdpcqNA6k7L8GHxmHUlZ23lDU6vd5iq8s46kLF+ht7u06b6lEYam1pGUCb3Fg3UmVU9ChR5e7496QoV161CqRkKFrgam0rDU10UcihVG/qX0VCoXmCRb62RK1qECk+TROpuK14Jv+3UPL4kbsR39J/5+f1xYXxJ/xy919ed6b9Ypf2zTv/AfYjvdzq3DXm8xyL8TFqpH5rrqAAAAAAAAAAAAAADAL1JvLRtxuR1eMVdhmC6sZ478SOe5ZJXzl/aTddIKFsIihHM31iEreimprxXhXKgz7/kVT6d3qHU8FQWTv7ysDAo3OLHvGHEwD3UcsTcyR6tAK2OdS5HcaaysYylaSAUOrVOpkroMP+tJ9gZChXGORUMehQqtMynz/hhKvb6PAdtRvr/wv1rdU3+/l7+GfrZQ+iSMvq0jKRN6i5g/XuRJ/aH/MY2vDrErVOj/3SLpWsdSdCdW6GCF7EHwk+LUOpmSTfADv/9vbU4Gp4GH8OsqbqzjVVf2e+bFOmBFZf8t/mrG/DljW3iHHm/VdG2d9EfGaWDTFkmE/4BD+84CAAAAAAAAAAAAAIAYWO+Tf6Xriuv2t/HNjXpdDS5YyP0hi/e0mckl53c04rt63wRPrD6IfxZt8cQ2F2cFTYpanbV1OhVv4QK9zNaXDj/8kFknU9MPPITWuRTJx3a5P//Q0yWUL+LOOpQqaXAT+xT276Tm1DqTMu+PoXQSqaeVa3v/42p1bzsO5Cv0tUhWXN5lHUmZ8Arl4dXw6F3oDz0NS+WBqa/GdClU6ORA509TqcDoTwI+tRMrdNTWSLti7PnZoia4FNjLK2IWKjBJUutsKtJwgT4+t5X8u2ha56us/HDugXXESqSdd3JGvVj7/k528Y/SUaM/uInLoLfkeHUAAAAAAAAAKPIHFY5rgrsLnkgAAAAASUVORK5CYII=",
             title:"More"
-        }
-        
+        }     
     ]
     const {state, dispatch} = useContext(AppContext)
   return (
     state?.isLogin ?
     <div className={`main-nav addBorder`}>
-        <h2>Socailize</h2>
+        <img src='/appp-title-2.jpg' className='app-title' alt="title-icon"/>
     
        {/* {state?.showNavTitle? <img className="clone-title" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfsGUMX5_VbQJQ4OpHr0SWdUin5PjJyLmfQ7Zzd8JyGA&s" alt="" />
        :<FaInstagram className="instaLogo"/>} */}

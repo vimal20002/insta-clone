@@ -2,6 +2,7 @@
 import { AppContext } from '@app/context/MainContext'
 import { useRouter, usePathname } from 'next/navigation'
 import React, { useContext, useEffect } from 'react'
+import { GiveData } from './GiveData'
 
 type props={
     ImgLink:string,
@@ -10,7 +11,8 @@ type props={
 }
 const NavElements = ({ImgLink,title,id}:props) => {
   const {state,dispatch}=useContext(AppContext)
-  const {searchFlag, notiFlag, user} = state;
+  const {searchFlag, notiFlag} = state;
+  const user = GiveData()
   const router = useRouter()
   const pathname = usePathname()
  
@@ -66,7 +68,7 @@ const NavElements = ({ImgLink,title,id}:props) => {
       }
       else if(title === 'Profile')
       {
-        router.push(`${user?.username}`)
+        router.push(`/${user?.username}`)
       }
       else{
         router.push('/')

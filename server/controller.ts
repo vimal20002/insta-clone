@@ -95,8 +95,16 @@ export const getUserData = async(req:Request,res:Response)=>{
     try {
         const {username} = req.body;
         console.log(username)
-        const user = await userModal.findOne({username});
-        console.log( user)
+        const user:any = await userModal.findOne({username});
+        const data = await postModel.find({});
+        const obj = data?.filter((e)=>{
+            console.log(e)
+            return e?.username == username;
+        })
+        console.log(obj)
+        // console.log( user)
+        if(user)
+        user.posts = obj;
         res.json(user)
     } catch (error) {
         console.log(error);
@@ -105,6 +113,12 @@ export const getUserData = async(req:Request,res:Response)=>{
 export const getFeed = async(req:Request, res:Response)=>{
     try {
         const feed = await postModel.find({})
+        for (var i = feed.length - 1; i > 0; i--) { 
+            var j = Math.floor(Math.random() * (i + 1));              
+            var temp = feed[i];
+            feed[i] = feed[j];
+            feed[j] = temp;
+        }
         res.json(feed)
     } catch (error) {
         console.log(error)
@@ -186,7 +200,11 @@ export const getUser = async (req : Request, res:Response)=>
     try {
         const {uid} = req.body;
         const user = await userModal.findById(uid)
-        res.json(user)
+        const data = await postModel.find({});
+        const obj = data?.map((e)=>{
+            return e?.username === uid;
+        })
+        res.json({...user, posts:obj})
     } catch (error) {
         console.log(error)
     }

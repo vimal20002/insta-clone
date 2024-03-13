@@ -1,4 +1,5 @@
 "use client"
+import ErrorPage from "@components/ErrorPage"
 import ReelCard from "@components/ReelCard"
 
 
@@ -26,6 +27,7 @@ const page = () => {
      return <ReelCard vidLink={e?.vidLink} id={e?.id} key={e?.id} />
     })
     }
+  
    </div>
   )
 }

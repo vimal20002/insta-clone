@@ -5,7 +5,11 @@
     flex-direction: row;
     column-gap: 2px;
 }
-
+.app-title{
+    margin: 9px;
+    width: 50px;
+    height: 50px;
+}
 .nav-element-images{
     width: 20px;
     height: 20px;
@@ -400,7 +404,7 @@ a{
     position: fixed;
     left: 440px;
     top: 90px;
-    z-index: 2;
+    z-index: 8;
     background-color: #fbf8f8;
     border-radius: 10px;
     backdrop-filter: blur(10px);
@@ -412,7 +416,7 @@ a{
     top: 0;
     left: -1000px;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    z-index: 2;
 }
 .create-post-heading{
     margin-top:15px;
@@ -1115,4 +1119,39 @@ width: 25px;
 .txt3{
     width: 200px;
     /* border: 2px solid red; */
+}
+
+/* Error Page */
+.page_404{ padding:40px 0; background:#fff; font-family: 'Arvo', serif;
+}
+
+.page_404  img{ width:100%;}
+
+.four_zero_four_bg{
+ 
+ background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+    height: 400px;
+    background-position: center;
+ }
+ 
+ 
+ .four_zero_four_bg h1{
+ font-size:80px;
+ }
+ 
+  .four_zero_four_bg h3{
+			 font-size:80px;
+			 }
+			 
+			 .link_404{			 
+	color: #fff!important;
+    padding: 10px 20px;
+    background: #39ac31;
+    margin: 20px 0;
+    display: inline-block;}
+	.contant_box_404{ margin-top:-50px;}
+.error-container{
+position: relative;
+width: 200px;
+margin-left:550px;
 }

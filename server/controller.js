@@ -110,7 +110,15 @@ const getUserData = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const { username } = req.body;
         console.log(username);
         const user = yield UserModel_1.userModal.findOne({ username });
-        console.log(user);
+        const data = yield PostSchema_1.postModel.find({});
+        const obj = data === null || data === void 0 ? void 0 : data.filter((e) => {
+            console.log(e);
+            return (e === null || e === void 0 ? void 0 : e.username) == username;
+        });
+        console.log(obj);
+        // console.log( user)
+        if (user)
+            user.posts = obj;
         res.json(user);
     }
     catch (error) {
@@ -121,6 +129,12 @@ exports.getUserData = getUserData;
 const getFeed = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const feed = yield PostSchema_1.postModel.find({});
+        for (var i = feed.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = feed[i];
+            feed[i] = feed[j];
+            feed[j] = temp;
+        }
         res.json(feed);
     }
     catch (error) {
@@ -213,7 +227,11 @@ const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { uid } = req.body;
         const user = yield UserModel_1.userModal.findById(uid);
-        res.json(user);
+        const data = yield PostSchema_1.postModel.find({});
+        const obj = data === null || data === void 0 ? void 0 : data.map((e) => {
+            return (e === null || e === void 0 ? void 0 : e.username) === uid;
+        });
+        res.json(Object.assign(Object.assign({}, user), { posts: obj }));
     }
     catch (error) {
         console.log(error);

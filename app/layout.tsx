@@ -23,7 +23,7 @@ export default function RootLayout({ children }: props) {
           <Nav/>
           <SearchUser/>
           <Notification/>
-          <PostBox/>
+          <PostBox/>     
           {children}
           </MainProvider>
         </AuthProvider>
