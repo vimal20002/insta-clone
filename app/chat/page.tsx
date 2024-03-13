@@ -6,7 +6,6 @@ import ChatCard from '@components/ChatCard';
 import { GiveData } from '@components/GiveData';
 import InputBox from '@components/InputBox';
 import MessageBox from '@components/MessageBox';
-import Check from '@components/check';
 
 import { useSession } from 'next-auth/react';
 import { useContext, useEffect, useState } from 'react';
