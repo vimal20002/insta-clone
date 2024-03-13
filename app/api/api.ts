@@ -1,6 +1,6 @@
 import axios from 'axios';
 const handler = axios.create({
-    baseURL: 'http://127.0.0.1:7000',
+    baseURL: 'https://insta-backend-2636.onrender.com',
 })
 export const handleLogin = async(formdata:Object)=>{
     const res:any =  await handler.post('/login',formdata)
