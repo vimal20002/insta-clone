@@ -51,7 +51,7 @@ const page = () => {
     let sk:Socket | null;
     const connectSocket=() => {
         sk?.disconnect();
-        const socketInstance = io('http://localhost:7000')
+        const socketInstance = io('https://insta-backend-2636.onrender.com:7000')
         socketInstance.on("connect", () => {
             console.log(socketInstance)
             console.log(socketInstance?.id); // x8WIv7-mJelg7on_ALbx
