@@ -1,6 +1,8 @@
 import { ReactElement } from "react"
 import Nav from "../components/Nav"
 import "@styles/styles.css"
+import "./globals.css";
+
 import AuthProvider from "@components/AuthProvider"
 import MainProvider from "./providers/MainProvider"
 import SearchUser from "@components/SearchUser"

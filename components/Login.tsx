@@ -6,13 +6,17 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { AppContext } from "@app/context/MainContext";
 import { handleLogin } from "@app/api/api";
+import AlertBox from "./AlertBox";
 
 const Login = () => {
     const { state,dispatch } = useContext(AppContext);
-    const [index, setIndex] = useState(2);
-    const [email, setEmail] = useState("");
-    const [ok, setOk] = useState<boolean>()
-    const [password, setPassword] = useState("");
+    const [index, setIndex] = useState<number>(2);
+    const [email, setEmail] = useState<string>("");
+    const [message, setMessage] = useState<string>("");
+    const [type, setType] = useState<string>("");
+    const [isAlert, setIsAlert] = useState<boolean>(false);
+    const [ok, setOk] = useState<Boolean>()
+    const [password, setPassword] = useState<string>("");
     const {isLogin} = state;
     useEffect(() => {
     }, [isLogin])
@@ -28,24 +32,30 @@ const Login = () => {
         localStorage.setItem('user', JSON.stringify(data));  
         if(data?.username)
         {
-            dispatch({type:"setLogin"})
+            setMessage("Logged In !")
+            setType("success")
+            setIsAlert(true)
+            setTimeout(()=>{
+
+                dispatch({type:"setLogin"})
+            },1000)
         }
+        else{
+            
+            setMessage("Wrong Credentials")
+            setType("error")
+        }
+        setIsAlert(true)
     }
-    const intervalId = setInterval(() => {
-        if (index === 2) {
-            setIndex(1);
-        }
-        else {
-            setIndex(2);
-        }
-    }, 2000)
-    setTimeout(() => {
-        clearInterval(intervalId);
-    }, 5000)
+   useEffect(()=>{
+    console.log(setIsAlert)
+   },[setIsAlert])
+   
     return (
 
         <div className="login-main">
-            <div className="images-section">
+{          isAlert &&           <AlertBox type={type}  message={message} onClose={()=>setIsAlert(false)}/>
+}            <div className="images-section">
                 <img src="/loginmain.png" className="loginmainimage" alt="" />
                 <img src={`/loginphoto${index}.png`} className="loginsecondaryimage" alt="" />
             </div>

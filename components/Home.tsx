@@ -9,6 +9,7 @@ import { GiveData } from "./GiveData";
 import { getFeed } from "@app/api/api";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Spinner from "./Spinner";
+import AlertBox from "./AlertBox";
 
 const Home = () => {
   const { state, dispatch } = useContext(AppContext);
