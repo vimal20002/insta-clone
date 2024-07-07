@@ -47,6 +47,19 @@ const Login = () => {
         }
         setIsAlert(true)
     }
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setIndex(prevIndex => prevIndex === 2 ? 1 : 2);
+        }, 2000);
+        const timeoutId = setTimeout(() => {
+            clearInterval(intervalId);
+        }, 5000);
+        return () => {
+            clearInterval(intervalId);
+            clearTimeout(timeoutId);
+        };
+    }, []);
+    
    useEffect(()=>{
     console.log(setIsAlert)
    },[setIsAlert])
