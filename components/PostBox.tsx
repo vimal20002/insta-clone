@@ -63,18 +63,15 @@ const handlePost = async ():Promise<void> => {
   const res :Res2 = await addPost(formdata)
   console.log(res)
   if (res.status === 200) {
-
     setMessage("Posted !")
     setType("success")
   }
   else {
-
     setMessage("Something Went Wrong")
     setType("error")
   }
   setIsAlert(true)
   setTimeout(() => {
-
     dispatch({
       type: 'notPosting'
     })
