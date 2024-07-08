@@ -9,7 +9,7 @@ import { GiveData } from "./GiveData"
 import AlertBox from "./AlertBox"
 
 const PostBox = () => {
-   const {state, dispatch}=useContext(AppContext)
+   const {state, dispatch}=useContext(AppContext);
    const [message, setMessage] = useState<string>("");
     const [type, setType] = useState<string>("");
     const [isAlert, setIsAlert] = useState<boolean>(false);

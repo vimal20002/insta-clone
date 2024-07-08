@@ -2,10 +2,7 @@
 import { getFriends, getUserData } from "@app/api/api"
 import { AppContext } from "@app/context/MainContext"
 import { GiveData } from "@components/GiveData"
-import Nav from "@components/Nav"
-import PhotoCard from "@components/PhotoCard"
 import ProfileComponent from "@components/ProfileComponent"
-import Image from "next/image"
 import { useParams, useRouter } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
 
