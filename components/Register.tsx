@@ -6,12 +6,9 @@ import { getAllUsersName, handleRegisterAPI } from "@app/api/api"
 import { useRouter } from 'next/navigation'
 import Warning from "./warning/Warning"
 import debounce from 'lodash/debounce'
+import { UsernameArrayType } from "@Interfaces"
 
-interface UsernameArrayType {
-  id: string,
-  username: string,
-  __v: number
-}
+
 
 
 

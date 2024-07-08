@@ -9,21 +9,12 @@ import AlertBox from "./AlertBox"
 import { AppContextType, FormData2, LoggedInUser, Res2 } from "@Interfaces"
 
 const PostBox = () => {
-<<<<<<< HEAD
-   const {state, dispatch}=useContext(AppContext);
-   const [message, setMessage] = useState<string>("");
-    const [type, setType] = useState<string>("");
-    const [isAlert, setIsAlert] = useState<boolean>(false);
-   const [us, setUs] = useState<string>("")
-   const [val, setVal] = useState<string>("Select from computer")
-=======
 const { state, dispatch }:AppContextType = useContext(AppContext)
 const [message, setMessage] = useState<string>("");
 const [type, setType] = useState<string>("");
 const [isAlert, setIsAlert] = useState<boolean>(false);
 const [us, setUs] = useState<string>("")
 const [val, setVal] = useState<string>("Select from computer")
->>>>>>> 5373562b4b2372f9662cef153cfa2546f38cd39c
 
 
 const [caption, setCaption] = useState<string>("")
@@ -72,18 +63,15 @@ const handlePost = async ():Promise<void> => {
   const res :Res2 = await addPost(formdata)
   console.log(res)
   if (res.status === 200) {
-
     setMessage("Posted !")
     setType("success")
   }
   else {
-
     setMessage("Something Went Wrong")
     setType("error")
   }
   setIsAlert(true)
   setTimeout(() => {
-
     dispatch({
       type: 'notPosting'
     })
