@@ -8,7 +8,7 @@ import { GiveData } from "./GiveData"
 import AlertBox from "./AlertBox"
 import { AppContextType, FormData2, LoggedInUser, Res2 } from "@Interfaces"
 
-const PostBox = () => {
+const PostBox = ():JSX.Element => {
 const { state, dispatch }:AppContextType = useContext(AppContext)
 const [message, setMessage] = useState<string>("");
 const [type, setType] = useState<string>("");
