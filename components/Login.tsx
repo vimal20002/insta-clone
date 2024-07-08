@@ -1,5 +1,5 @@
 "use client"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react";
 import InputBox from "./InputBox";
 import ButtonPrimary from "./ButtonPrimary";
 import Link from "next/link";
@@ -81,9 +81,8 @@ const Login = () => {
                     </Link>
                 </div>
             </div>
-
         </div>
-    )
+    );
 }
 
-export default Login
+export default Login;

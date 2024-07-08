@@ -4,9 +4,6 @@
 @tailwind utilities;
 
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 .main-home{
     display: inline-flex;
@@ -304,9 +301,9 @@ border-right: 1px solid rgba(196, 190, 190, 0.939);
     cursor: pointer;
 }
 .loginmainimage{
-    width: 380px;
+    width: 500px;
     height: 581px;
-
+    margin-left: -122px;
 }
 .loginsecondaryimage{
     width: 215px;
