@@ -3,59 +3,66 @@ import { useContext, useEffect, useState } from "react"
 import InputBox from "./InputBox";
 import ButtonPrimary from "./ButtonPrimary";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
 import { AppContext } from "@app/context/MainContext";
 import { handleLogin } from "@app/api/api";
 import AlertBox from "./AlertBox";
+import {  AppContextType, ErrorRes, FormData, initProps, LoggedInUser } from "@Interfaces";
 
 const Login = () => {
-    const { state,dispatch } = useContext(AppContext);
+    const { state, dispatch }:AppContextType = useContext(AppContext);
     const [index, setIndex] = useState<number>(2);
     const [email, setEmail] = useState<string>("");
     const [message, setMessage] = useState<string>("");
     const [type, setType] = useState<string>("");
     const [isAlert, setIsAlert] = useState<boolean>(false);
-    const [ok, setOk] = useState<Boolean>()
     const [password, setPassword] = useState<string>("");
-    const {isLogin} = state;
+    const { isLogin }:initProps = state;
+
+
+
     useEffect(() => {
     }, [isLogin])
-    const handleSubmit = async () => {
-        console.log(email,password);
-        const formData = {
+
+    const handleSubmit = async ():Promise<void> => {
+        console.log(email, password);
+        const formData: FormData = {
             email, password,
             redirect: false
         }
         setEmail("")
         setPassword("")
-        const data = await handleLogin(formData)    
-        localStorage.setItem('user', JSON.stringify(data));  
-        if(data?.username)
-        {
+        let data: LoggedInUser | ErrorRes
+        data = await handleLogin(formData)
+        if ("message" in data && !data.message)
+            localStorage.setItem('user', JSON.stringify(data));
+        if ("username" in data && data?.username) {
             setMessage("Logged In !")
             setType("success")
             setIsAlert(true)
-            setTimeout(()=>{
+            setTimeout(() => {
 
-                dispatch({type:"setLogin"})
-            },1000)
+                dispatch({ type: "setLogin" })
+            }, 1000)
         }
-        else{
-            
+        else {
+
             setMessage("Wrong Credentials")
             setType("error")
         }
         setIsAlert(true)
     }
-   useEffect(()=>{
-    console.log(setIsAlert)
-   },[setIsAlert])
-   
+    setInterval(() => {
+        setIndex(index === 1 ? 2 : 1)
+    }, 1000)
+    useEffect(() => {
+        console.log(setIsAlert)
+    }, [setIsAlert])
+
     return (
 
         <div className="login-main">
-{          isAlert &&           <AlertBox type={type}  message={message} onClose={()=>setIsAlert(false)}/>
-}            <div className="images-section">
+            {isAlert && <AlertBox type={type} message={message} onClose={() => setIsAlert(false)} />
+            }            <div className="images-section">
                 <img src="/loginmain.png" className="loginmainimage" alt="" />
                 <img src={`/loginphoto${index}.png`} className="loginsecondaryimage" alt="" />
             </div>
