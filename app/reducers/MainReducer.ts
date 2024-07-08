@@ -1,52 +1,7 @@
-import { getAllUsers } from "@app/api/api"
-import { Socket, io } from "socket.io-client"
-type User = any;
- export type initProps ={
-    isLogin : boolean,
-    isPosting:boolean,
-    showNavTitle:boolean,
-    showMessageBox:boolean,
-    user:any,
-    users:Array<User>,
-    searchFlag:Boolean,
-    notiFlag:Boolean
-}
-export type SetLogin={
-    type:'setLogin',
-    payload:Object
-}
-export type SetPosting={
-    type:'setPosting'
-}
-export type NotPosting={
-    type:'notPosting'
-}
-export type ShowNavTitle={
-    type:'showNavTitle'
-}
-export type serachFlag={
-    type:'setSearchFlag'|'unSetSearchFlag'
-}
-export type notiFlag={
-    type:'setNotiFlag'|'unSetNotiFlag'
-}
-export type showMessageBox={
-    type:'showMessageBox'
-}
-export type getUsers={
-    type:'setUsers',
-    payload:Object
-}
-export type setUser={
-    type:'setUser',
-    payload:Object
-}
-export type hideNavTitle={
-    type:'hideNavTitle',
-    payload:Object
-}
+import { ActionType, initProps } from "@Interfaces"
 
-export type ActionType = SetLogin | SetPosting | NotPosting | ShowNavTitle | showMessageBox |getUsers  |setUser|hideNavTitle |serachFlag|notiFlag;
+
+
 const MainReducer = (initialState:initProps, action:ActionType) => { 
    switch(action.type)
   {

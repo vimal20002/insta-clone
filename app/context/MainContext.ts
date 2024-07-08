@@ -1,7 +1,7 @@
 "use client"
 
 
-import { initProps } from "@app/reducers/MainReducer"
+import { initProps } from "@Interfaces";
 import React, { createContext, Dispatch } from "react"
 
 export const initialState :initProps = {
