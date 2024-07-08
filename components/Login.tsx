@@ -21,6 +21,7 @@ const Login = () => {
 
 
     useEffect(() => {
+        console.log(isLogin)
     }, [isLogin])
 
     const handleSubmit = async ():Promise<void> => {
