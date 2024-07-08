@@ -1,5 +1,5 @@
 'use client'
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import UserShareDis from "./UserShareDis";
 import { searchUsers } from "@app/api/api";
 import { AppContext } from "@app/context/MainContext";
@@ -9,8 +9,27 @@ const SearchUser = () => {
     const [result, setResult] = useState<any[]>([]);
     const [isSearching, setIsSearching] = useState<Boolean>(false);
     const [user, setUser] = useState<string>('');
-    const {state} = useContext(AppContext)
+    const {state,dispatch} = useContext(AppContext)
     const {searchFlag} = state;
+    const searchRef=useRef<HTMLDivElement>(null);
+
+    const handleClickOutside=(event:MouseEvent)=>{
+        if(searchRef.current && !searchRef.current.contains(event.target as Node)){
+            dispatch({type:'unSetSearchFlag'});
+        }
+    }
+    useEffect(()=>{
+     if(searchFlag){
+        document.addEventListener("mousedown",handleClickOutside);
+     }
+     else{
+        document.removeEventListener("mousedown",handleClickOutside);
+     }
+
+     return ()=>{
+        document.removeEventListener("mousedown",handleClickOutside);
+     }
+    },[searchFlag])
     useEffect(()=>{
         if(typeof window != "undefined")
         {
@@ -30,7 +49,7 @@ const SearchUser = () => {
   return (<>    
   {
     searchFlag &&
-    <div className="search-mainn">
+    <div ref={searchRef} className="search-mainn">
       <h2 className="txt1">Search</h2>
       <input type="text" placeholder="Search" value={user} onChange={(e)=>{handleSearch(e.target.value)}} name="" id="" className="searchuser" onFocus={()=>{setIsSearching(true)}} />
       <hr />

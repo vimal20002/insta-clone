@@ -1,7 +1,6 @@
 "use client"
 import { useContext, useEffect, useState } from "react"
 import Login from "./Login";
-import Allstory from "./Allstory";
 import PostCard from "./PostCard";
 import SideBar from "./SideBar";
 import { AppContext } from "@app/context/MainContext";
@@ -44,10 +43,9 @@ const Home = () => {
   return (
     <>
       {isLogin ? <div className='mainn'>
-        <Allstory />
         <div className="main-home">
           <InfiniteScroll dataLength={feed.length} next={fetchMore} hasMore={true} loader={<Spinner/>}>
-          <div className="postCards">
+          <div className="postCards mt-2">
             {
               feed?.map((e: any) => {
                 return <PostCard  likedBy={e?.likedBy} id={e?._id} caption={e?.caption} comment={e?.comment} imageUri={e?.imageUri} likeCount={e?.likeCount} username={e?.username} key={e?._id} />

@@ -1,13 +1,33 @@
 'use client'
-import { useContext } from "react"
+import { useContext, useEffect, useRef } from "react"
 import NotificationCard from "./NotificationCard"
 import { AppContext } from "@app/context/MainContext"
 
 const Notification = () => {
-    const {state} = useContext(AppContext)
+    const {state,dispatch} = useContext(AppContext)
     const {notiFlag} = state;
+    
+    const notificationRef=useRef<HTMLDivElement>(null);
+    const handleClickOutside = (event:MouseEvent) => {
+      if (notificationRef.current && !notificationRef.current.contains(event.target as Node)) {
+       dispatch({type:'unSetNotiFlag'})
+       console.log("tried closing notification")
+      }
+    };
+    useEffect(() => {
+      if (notiFlag) {
+        document.addEventListener('mousedown', handleClickOutside);
+      } else {
+        document.removeEventListener('mousedown', handleClickOutside);
+      }
+  
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [notiFlag]);
+    
   return (<>
-   {notiFlag && <div className="search-mainn">
+   {notiFlag && <div ref={notificationRef} className="search-mainn">
             <h2 className="txt1">Notification</h2>
             <div className="noti-cards">
                 <NotificationCard flag={true} uri1="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQadq1dY-23P-ceYTIJ9A4-hulkOzlpSeirGI5bOCk1J4Rjn9C_NMHr-NQnppAJG0-GfP3xgrmJHpykwEM" uri2="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQadq1dY-23P-ceYTIJ9A4-hulkOzlpSeirGI5bOCk1J4Rjn9C_NMHr-NQnppAJG0-GfP3xgrmJHpykwEM"  val="Meloni Liked Your Photo"/>
