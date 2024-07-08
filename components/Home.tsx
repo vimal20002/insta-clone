@@ -22,6 +22,7 @@ const Home = () => {
       const res = GiveData();
       if (res) {
         dispatch({ type: "setUser", payload: res })
+        if(res._id !== "")
         dispatch({ type: "setLogin" })
       }
       const obj = await getFeed()
