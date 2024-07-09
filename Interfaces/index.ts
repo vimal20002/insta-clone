@@ -40,56 +40,57 @@ export interface ErrorRes {
 
 type User = any;
 
-export type initProps = {
-    isLogin: boolean,
-    isPosting: boolean,
-    showNavTitle: boolean,
-    showMessageBox: boolean,
-    user: any,
-    users: Array<User>,
-    searchFlag: Boolean,
-    notiFlag: Boolean
+export type initProps ={
+    isLogin : boolean,
+    isPosting:boolean,
+    showNavTitle:boolean,
+    showMessageBox:boolean,
+    user:any,
+    users:Array<User>,
+    searchFlag:Boolean,
+    notiFlag:Boolean
+}
+export type SetLogin={
+    type:'setLogin',
+}
+export type SetPosting={
+    type:'setPosting'
+}
+export type NotPosting={
+    type:'notPosting'
+}
+export type ShowNavTitle={
+    type:'showNavTitle'
+}
+export type serachFlag={
+    type:'setSearchFlag'|'unSetSearchFlag'
+}
+export type notiFlag={
+    type:'setNotiFlag'|'unSetNotiFlag'
+}
+export type showMessageBox={
+    type:'showMessageBox'
+}
+export type getUsers={
+    type:'setUsers',
+    payload:Object
+}
+export type setUser={
+    type:'setUser',
+    payload:Object
+}
+export type hideNavTitle={
+    type:'hideNavTitle',
+}
+export type ActionType = SetLogin | SetPosting | NotPosting | ShowNavTitle | showMessageBox |getUsers  |setUser|hideNavTitle |serachFlag|notiFlag;
+
+export interface AppContextType{
+state:initProps,
+dispatch:React.Dispatch<ActionType>
 }
 
-export type SetLogin = {
-    type: 'setLogin',
-}
-export type SetPosting = {
-    type: 'setPosting'
-}
-export type NotPosting = {
-    type: 'notPosting'
-}
-export type ShowNavTitle = {
-    type: 'showNavTitle'
-}
-export type serachFlag = {
-    type: 'setSearchFlag' | 'unSetSearchFlag'
-}
-export type notiFlag = {
-    type: 'setNotiFlag' | 'unSetNotiFlag'
-}
-export type showMessageBox = {
-    type: 'showMessageBox'
-}
-export type getUsers = {
-    type: 'setUsers',
-    payload: Object
-}
-export type setUser = {
-    type: 'setUser',
-    payload: Object
-}
-export type hideNavTitle = {
-    type: 'hideNavTitle',
-    payload: Object
-}
-export type ActionType = SetLogin | SetPosting | NotPosting | ShowNavTitle | showMessageBox | getUsers | setUser | hideNavTitle | serachFlag | notiFlag;
 
-export interface AppContextType {
-    state: initProps,
-    dispatch: React.Dispatch<ActionType>
-}
+
 
 export interface FormData {
     email: string;
@@ -108,8 +109,16 @@ export interface FormData2 extends UsernameArrayType {
     likeCount: number,
     caption: string
 }
-export interface Res2 {
-    message: string,
-    status: number
+export interface Res2{
+    message:string,
+    status:number
+}
+export interface FormData3{
+    pid:string;
+    username:string
 }
 
+export interface LargePost extends Post{
+    pid:string,
+    setFlag(flag:boolean):void
+}

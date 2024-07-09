@@ -1,7 +1,7 @@
 type LikeCountProps = {
   count:number
 }
-const LikeCounts = (props:LikeCountProps) => {
+const LikeCounts = (props:LikeCountProps):JSX.Element => {
   const {count} = props;
   return (
     <div>

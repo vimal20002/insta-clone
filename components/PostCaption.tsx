@@ -2,7 +2,7 @@ type PostCaptionProps  = {
     name:string,
     caption?:string
 }
-const PostCaption:React.FC<PostCaptionProps> = ({caption, name}) => {
+const PostCaption:React.FC<PostCaptionProps> = ({caption, name}):JSX.Element => {
 
   return (
     <div>

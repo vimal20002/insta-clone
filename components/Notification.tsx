@@ -11,6 +11,7 @@ const Notification = () => {
     const handleClickOutside = (event:MouseEvent) => {
       if (notificationRef.current && !notificationRef.current.contains(event.target as Node)) {
        dispatch({type:'unSetNotiFlag'})
+       dispatch({type:"showNavTitle"})
        console.log("tried closing notification")
       }
     };

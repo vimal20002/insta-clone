@@ -1,34 +1,37 @@
-'use client'
 import { FaRegHeart } from "react-icons/fa6";
 import { FaRegComment } from "react-icons/fa";
 import { IoPaperPlaneOutline } from "react-icons/io5";
 import { FaRegBookmark } from "react-icons/fa";
 import Image from "next/image";
-import {  useEffect, useState } from "react";
 import { disLikePost, likePost } from "@app/api/api";
 import Link from "next/link";
+import { FormData3 } from "@Interfaces";
 type props={
-  pid:String| String[],
+  pid:string,
   cnt:number,
   incLike:(cnt:number)=>void,
   liked:Boolean,
   setLiked:(liked:Boolean)=>void,
-  me:String,
+  me:string,
   setShareBox:(flag:Boolean)=>void,
 
 }
-const PostOptions = ({pid, cnt, incLike, liked, setLiked,me, setShareBox}:props) => {
-  const handleLikeClick= async()=>{
+const PostOptions = ({pid, cnt, incLike, liked, setLiked,me, setShareBox}:props):JSX.Element => {
+  const handleLikeClick= async():Promise<void>=>{
+    setLiked(!liked)
+    const formData:FormData3 = {
+      pid,
+      username:me
+    }
     if(!liked){
       console.log("likinggg")
-      await likePost({pid, username:me})
       incLike(cnt+1);
+      await likePost(formData)
     }
     else{
       incLike(cnt - 1)
-      await disLikePost({pid, username:me})
+      await disLikePost(formData)
     }
-    setLiked(!liked)
   }
   return (
     <div className="postoptions">

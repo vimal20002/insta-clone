@@ -3,9 +3,9 @@
 import React, { useContext } from 'react'
 import NavElements from './NavElements'
 import { AppContext } from '@app/context/MainContext'
-import apptitle from '../public/appp-title-2.jpg'
+import { AppContextType } from '@Interfaces'
 
-const Nav = () => {
+const Nav = ():JSX.Element => {
     const navItems=[
         {
             ImgLink:"data:image/png;base64,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",
@@ -37,7 +37,7 @@ const Nav = () => {
             title:"More"
         }     
     ]
-    const {state, dispatch} = useContext(AppContext)
+    const {state}:AppContextType = useContext(AppContext)
   return (
     state?.isLogin ?
     <div className={`main-nav addBorder`}>
@@ -48,11 +48,11 @@ const Nav = () => {
        <div className="items">
         {
             navItems.map((elements)=>{
-                return <NavElements key={elements.title}  id={""} ImgLink={elements.ImgLink} title={elements.title}/>
+                return <NavElements key={elements.title}   ImgLink={elements.ImgLink} title={elements.title}/>
             })
         }
        </div>
-    </div>:""
+    </div>:<></>
   )
 }
 
