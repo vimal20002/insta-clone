@@ -1,20 +1,10 @@
 import { follow, unfollow } from "@app/api/api"
 import Gallery from "./Gallery"
+import { PorfileInformation } from "@Interfaces"
 
-type props={
-    flag:Boolean,
-    postsArray:any[],
-    username:String,
-    name:String,
-    followers:number,
-    following:number,
-    followed:Boolean,
-    setFollowed:(followed:Boolean)=>void,
-    myname:String
 
-}
 
-const ProfileComponent = ({followed, setFollowed, flag, postsArray, followers, following, name,username, myname}:props) => {
+const ProfileComponent = ({followed, setFollowed, flag, postsArray, followers, following, name,username, myname}:PorfileInformation) => {
     
       const handleClick=async()=>{
         if(followed)
@@ -52,9 +42,9 @@ const ProfileComponent = ({followed, setFollowed, flag, postsArray, followers, f
         </div>
 
         <div className="follower-info">
-          <span className="follower-info-span"><h4>{postsArray?.length}</h4> posts</span>
-          <span className="follower-info-span"><h4>{followers}</h4> followers</span>
-          <span className="follower-info-span"><h4>{following}</h4>following</span>
+          <span className="follower-info-span"><h4>{postsArray?.length || 0}</h4> Posts</span>
+          <span className="follower-info-span"><h4>{followers}</h4> Followers</span>
+          <span className="follower-info-span"><h4>{following}</h4>Following</span>
         </div>
 
       </div>
@@ -71,4 +61,4 @@ const ProfileComponent = ({followed, setFollowed, flag, postsArray, followers, f
   )
 }
 
-export default ProfileComponent
+export default ProfileComponent;

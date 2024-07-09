@@ -53,6 +53,7 @@ export type initProps = {
 
 export type SetLogin = {
     type: 'setLogin',
+    payload?:Object
 }
 export type SetPosting = {
     type: 'setPosting'
@@ -96,7 +97,20 @@ export interface FormData {
     password: string;
     redirect: boolean
 }
-
+export interface UserDetail{
+    id?:string
+    username:String,
+    name:String,
+    postsArray:any[],
+    followers:number,
+    following:number,
+    followed:Boolean,
+}
+export interface PorfileInformation extends UserDetail{
+    flag:Boolean,
+    setFollowed:(followed:Boolean)=>void,
+    myname:String
+}
 export interface UsernameArrayType {
     id?: string,
     username: string,
@@ -108,6 +122,7 @@ export interface FormData2 extends UsernameArrayType {
     likeCount: number,
     caption: string
 }
+
 export interface Res2 {
     message: string,
     status: number
