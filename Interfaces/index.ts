@@ -1,47 +1,43 @@
-export interface FormData{
-email : string;
-    password: string;
-    redirect:boolean
+
+export interface Message {
+    message: string;
+    email: string;
 }
-export interface Message{
-    message:string;
-    email:string;
-}
-export 
-interface Friends{
-    fUsername:string;
-    fEmail:string;
-    _id:string;
-    messages:[Message]
+export interface Friends {
+    fUsername: string;
+    fEmail: string;
+    _id: string;
+    messages: [Message]
 
 }
 export interface Comment {
-    username:string;
-    comment:string;
+    username: string;
+    comment: string;
 }
-export interface Post{
-    caption :string;
-    comments:[Comment];
-    imageUri:string;
-    likeCount:number;
-    likedBy:[string];
-    username:string
+export interface Post {
+    caption: string;
+    comments: [Comment];
+    imageUri: string;
+    likeCount: number;
+    likedBy: [string];
+    username: string
 }
 export interface LoggedInUser {
-    email:string;
-    following:[string];
-    friends:[Friends];
-    name:string;
-    notification:[Message];
-    posts:[Post];
-    socketIdd:string;
-    username:string;
-    _v:number;
-    _id:string
+    email: string;
+    following: [string];
+    friends: [Friends];
+    name: string;
+    notification: [Message];
+    posts: [Post];
+    socketIdd: string;
+    username: string;
+    _v: number;
+    _id: string
 }
 export interface ErrorRes {
-    message:string
+    message: string
 }
+
 type User = any;
 
 export type initProps ={
@@ -93,8 +89,22 @@ state:initProps,
 dispatch:React.Dispatch<ActionType>
 }
 
-export interface FormData2{
+
+
+
+export interface FormData {
+    email: string;
+    password: string;
+    redirect: boolean
+}
+
+export interface UsernameArrayType {
+    id?: string,
     username: string,
+    __v?: number
+}
+
+export interface FormData2 extends UsernameArrayType {
     imageUri: string,
     likeCount: number,
     caption: string
