@@ -49,6 +49,7 @@ border-right: 1px solid rgba(196, 190, 190, 0.939);
     border-radius: 6px;
     /* border: 2px solid #ff0000; */
     width: 50px;
+    margin-left: -5px;
     padding: 10px;
     cursor: pointer;
 }

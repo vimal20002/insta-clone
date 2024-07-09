@@ -1,7 +1,7 @@
 type postcommentprops = {
     count:number
 }
-const PostCommentCount:React.FC<postcommentprops> = ({count}) => {
+const PostCommentCount:React.FC<postcommentprops> = ({count}):JSX.Element => {
   return (
     <div>
       <p className="postcommentcount">View all {count} comments</p>

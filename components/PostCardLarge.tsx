@@ -9,25 +9,19 @@ import { RxCross1 } from "react-icons/rx";
 import { useRouter } from 'next/navigation'
 import LikeCounts from "./LikeCounts"
 import { addComment } from "@app/api/api"
+import { AppContextType, Comment, initProps, LargePost} from "@Interfaces"
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime"
 
-type props = {
-    pid:String| String[],
-    setFlag:(flag:Boolean)=>void,
-    imageUri:string,
-    username:string,
-    likeCount:number,
-    comments:[any],
-    likedBy:[String]
-}
-const PostCardLarge = ({pid, setFlag, comments, imageUri, likeCount, username, likedBy}:props) => {
-    const router = useRouter();
-    const {dispatch}=useContext(AppContext)
+
+
+const PostCardLarge = ({pid, setFlag, comments, imageUri, likeCount, username, likedBy}:LargePost):JSX.Element => {
+    const router:AppRouterInstance = useRouter();
     const [val, setVal] = useState<string>("");
-    const [comArr, setComArr] = useState<any[]>(comments)
+    const [comArr, setComArr] = useState<[Comment]>(comments)
     const [cnt, setCnt] = useState<number>(0)
     const [liked, setLiked] = useState<Boolean>(false)
-    const {state} = useContext(AppContext)
-    const {user} = state;
+    const {state}:AppContextType = useContext(AppContext)
+    const {user}:initProps = state;
     useEffect(()=>{
         setCnt(likeCount)
         setComArr(comments)
@@ -36,16 +30,16 @@ const PostCardLarge = ({pid, setFlag, comments, imageUri, likeCount, username, l
       // console.log(likedBy?.includes(user?.username), caption)
       setLiked(likedBy?.includes(user?.username))
     },[user])
-    const f = ()=>{
-    }
+    
     const handleRandClick=()=>{
        setFlag(false)
        router.push('/')
       }
       const handleComment = async()=>{
-        const username = user?.username;
-        const obj = {val, username}
-        setComArr([...comArr, obj])
+        const username:string = user?.username;
+        const obj:Comment = {comment:val, username}
+        comArr.push(obj)
+        setComArr(comArr)
         await addComment({val,pid, username})
       }
   return (<>

@@ -8,11 +8,10 @@ import { GiveData } from "./GiveData";
 import { getFeed } from "@app/api/api";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Spinner from "./Spinner";
-import AlertBox from "./AlertBox";
 
 const Home = () => {
   const { state, dispatch } = useContext(AppContext);
-  const { user, isLogin } = state;
+  const {isLogin } = state;
   const [feed, setFeed] = useState<any>([]);
   const [totalPosts,setTotalPosts]=useState()
   useEffect(() => {

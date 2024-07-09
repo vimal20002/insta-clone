@@ -85,7 +85,6 @@ export type setUser={
 }
 export type hideNavTitle={
     type:'hideNavTitle',
-    payload:Object
 }
 export type ActionType = SetLogin | SetPosting | NotPosting | ShowNavTitle | showMessageBox |getUsers  |setUser|hideNavTitle |serachFlag|notiFlag;
 
@@ -103,4 +102,13 @@ export interface FormData2{
 export interface Res2{
     message:string,
     status:number
+}
+export interface FormData3{
+    pid:string;
+    username:string
+}
+
+export interface LargePost extends Post{
+    pid:string,
+    setFlag(flag:boolean):void
 }

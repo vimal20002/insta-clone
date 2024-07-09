@@ -8,6 +8,7 @@ import PostOptions from "./PostOptions"
 import UserdetailPost from "./UserdetailPost"
 import { AppContext } from "@app/context/MainContext"
 import ShareUser from "./ShareUser"
+import { AppContextType, initProps } from "@Interfaces"
 type props = {
   username:string,
   imageUri:string,
@@ -18,12 +19,12 @@ type props = {
   likedBy:[String],
 
 }
-const PostCard = ({username, imageUri, likeCount, comment, caption,id, likedBy}:props) => {  
-  const [cnt, setCnt] = useState(likeCount)
+const PostCard = ({username, imageUri, likeCount, comment, caption,id, likedBy}:props):JSX.Element => {  
+  const [cnt, setCnt] = useState<number>(likeCount)
   const [liked, setLiked] = useState<Boolean>(false)
-  const {state} = useContext(AppContext)
+  const {state}:AppContextType = useContext(AppContext)
   const[shareBox, setShareBox] = useState<Boolean>(false)
-  const {user} = state;
+  const {user}:initProps = state;
 
   useEffect(()=>{
     // console.log(likedBy?.includes(user?.username), caption)
