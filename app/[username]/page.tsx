@@ -1,53 +1,39 @@
 "use client"
 import { getFriends, getUserData } from "@app/api/api"
 import { AppContext } from "@app/context/MainContext"
+import ErrorPage from "@components/ErrorPage"
 import { GiveData } from "@components/GiveData"
 import ProfileComponent from "@components/ProfileComponent"
+import { AppContextType, UserDetail } from "@Interfaces"
 import { useParams, useRouter } from "next/navigation"
 import { useContext, useEffect, useState } from "react"
 
 
 const page = () => {
-  const { state, dispatch } = useContext(AppContext);
-  const { username } = useParams();
-  const [flag, setFlag] = useState<boolean>(false);
-  const user = GiveData()
-  const [obj, setObj] = useState<any>()
+  const { state, dispatch}: AppContextType = useContext(AppContext);
+  const {isLogin} =state;
+  const [obj, setObj] = useState<UserDetail>()
   const [followed, setFollowed] = useState<Boolean>(false);
-  const router=useRouter();
 
  
 
-  useEffect(() => {
-    (async () => {
-      if (user) {
-        console.log(user)
-        dispatch({ type: 'setLogin', payload: user })
-        const res = await getUserData({ username })
-        if(res === null){
-          router.push("/error")
-         }
-        console.log(res)
-        setObj(res)
-        setFlag(res?.username == user?.username)
-        const obj = await getFriends({ username: user?.username })
-        const arr = obj?.filter((e: any) => {
-          return e?.fUsername == res?.username
-        })
-
-      if (arr.length) setFollowed(true)
-    }
-    })();
+useEffect(() => {
+  if(localStorage.getItem('user')){
+  dispatch({type:'setLogin'}) 
+  const userItem=localStorage.getItem('user')
+  const userObject:UserDetail = userItem ? JSON.parse(userItem) : null;
+  console.log(userObject);
+  setObj(userObject)
+  }
 }, [])
 
-
-  useEffect(() => {
-    dispatch({ type: 'setLogin' })
-  }, [])
 return (
   <>
-
-    <ProfileComponent followed={followed} setFollowed={setFollowed} name={obj?.name} username={obj?.username} followers={obj?.following?.length} following={obj?.friends?.length} flag={flag} postsArray={obj?.posts} myname={user?.username} />
+    {
+      isLogin ?
+      <ProfileComponent followed={obj?.following} flag={isLogin} setFollowed={setFollowed} name={obj?.name} username={obj?.username} followers={obj?.following?.length || 0}  following={obj?.friends?.length || 0}  postsArray={obj?.posts} myname={obj?.username} />
+      : <ErrorPage/>
+    }
   </>
 )
 }
