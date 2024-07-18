@@ -120,8 +120,9 @@ export interface FormData2 extends UsernameArrayType {
     likeCount: number,
     caption: string
 }
+
 export interface Res2{
-    message:string,
+    message:string;
     status:number
 }
 export interface FormData3{
